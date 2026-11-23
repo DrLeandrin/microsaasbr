@@ -39,6 +39,12 @@ export default async function HomePage({
       <p className="mt-2 hidden max-w-2xl text-sm leading-relaxed text-ink-soft sm:block sm:text-base">
         Templates com fonte conferida para WhatsApp, Pix, nota fiscal, loja e infoproduto. O botão abre o fluxo lá na origem.
       </p>
+      <p className="mt-3 rounded-full bg-teal-soft px-3 py-2 text-sm">
+        <Link href="/comece-aqui" className="font-semibold text-teal">
+          Comece aqui
+        </Link>
+        <span className="text-ink-soft"> se você ainda não usa n8n. O que é, quanto custa e o primeiro fluxo.</span>
+      </p>
       <FilterBar {...filters} ordem={ordem} integrations={integrations} />
       <p className="mt-4 text-sm text-muted">
         {filtered.length} {filtered.length === 1 ? "template" : "templates"}

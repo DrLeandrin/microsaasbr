@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { connection } from "next/server";
 import { CATEGORIES, INTEGRATIONS } from "@/lib/catalog";
 import { siteUrl } from "@/lib/config";
+import { GUIDES } from "@/lib/guides";
 import { listPublished } from "@/lib/queries";
 
 export const dynamic = "force-dynamic";
@@ -17,6 +18,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   return [
     { url: base, lastModified: now },
+    { url: `${base}/comece-aqui`, lastModified: now },
+    ...GUIDES.map((guide) => ({ url: `${base}${guide.href}`, lastModified: now })),
     { url: `${base}/enviar`, lastModified: now },
     { url: `${base}/patrocinar`, lastModified: now },
     ...CATEGORIES.map((category) => ({ url: `${base}/categoria/${category.slug}`, lastModified: now })),

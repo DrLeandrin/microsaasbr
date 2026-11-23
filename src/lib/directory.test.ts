@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { readFileSync } from "node:fs";
 import { emailBlockReason } from "./email";
+import { GUIDE_TEMPLATE_SLUGS, GUIDES } from "./guides";
 import { byNewest, filterTemplates, type TemplateView } from "./filter";
 import { renderNewsletter } from "./newsletter";
 import { itemsFromSeedBody } from "./seed-document";
@@ -96,6 +98,18 @@ test("filtra por integração e ordena pela data da fonte", () => {
     ["b"],
   );
   assert.equal(byNewest(items)[0]?.slug, "b");
+});
+
+test("os guias apontam para templates que existem no seed", () => {
+  const seed = JSON.parse(readFileSync("data/seed.json", "utf8")) as {
+    templates: { slug: string }[];
+  };
+  const slugs = new Set(seed.templates.map((item) => item.slug));
+  for (const slug of GUIDE_TEMPLATE_SLUGS) {
+    assert.equal(slugs.has(slug), true, slug);
+  }
+  assert.equal(GUIDES.length, 5);
+  assert.equal(new Set(GUIDES.map((guide) => guide.href)).size, 5);
 });
 
 test("rejeita JSON que não é um workflow", () => {
