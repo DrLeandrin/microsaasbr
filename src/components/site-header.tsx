@@ -13,7 +13,10 @@ export function SiteHeader() {
           </span>
           {SITE_NAME}
         </Link>
-        <nav aria-label="Principal" className="flex items-center gap-4 text-sm font-medium">
+        <nav aria-label="Principal" className="flex flex-wrap items-center justify-end gap-x-4 gap-y-1 text-sm font-medium">
+          <Link href="/comece-aqui" className="font-semibold text-teal">
+            Comece aqui
+          </Link>
           <Link href="/enviar" className="hover:text-teal">
             Enviar
           </Link>
